@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Study Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                <h2>StudyMind</h2>
+            </div>
+            <div class="config-section">
+                <label for="apiKey">Gemini API Key</label>
+                <input type="password" id="apiKey" placeholder="Enter API Key" autocomplete="off">
+            </div>
+            <div class="upload-section" id="drop-zone">
+                <p>Drag & Drop PDFs</p>
+                <p class="small">or click to browse</p>
+                <input type="file" id="fileInput" accept=".pdf" multiple style="display: none;">
+            </div>
+            <div id="uploadStatus" class="status-msg"></div>
+            
+            <div class="folder-management">
+                <label for="subjectInput">Subject Folder</label>
+                <div class="folder-input-group">
+                    <input type="text" id="subjectInput" placeholder="e.g. Physics" autocomplete="off">
+                    <button id="addFolderBtn" title="Add Subject">+</button>
+                </div>
+                <ul id="folderList" class="folder-list">
+                    <li class="folder-item active" data-subject="General">📁 General</li>
+                </ul>
+            </div>
+            <div id="uploadStatus" class="status-msg"></div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <div class="header-titles">
+                    <h1>Cognitive Study Assistant</h1>
+                </div>
+                <nav class="tabs-nav">
+                    <button class="tab-btn active" data-tab="tab-text">Textual Overview</button>
+                    <button class="tab-btn" data-tab="tab-visual">Visual Overview</button>
+                    <button class="tab-btn" data-tab="tab-qa">Q&A Chat</button>
+                </nav>
+            </header>
+
+            <div class="tabs-content">
+                <!-- Textual Overview Tab -->
+                <div id="tab-text" class="tab-panel active">
+                    <div id="textOverviewContent" class="overview-content">
+                        <div class="empty-state">Select a folder and upload a document to see the textual overview.</div>
+                    </div>
+                </div>
+
+                <!-- Visual Overview Tab -->
+                <div id="tab-visual" class="tab-panel">
+                    <div id="visualOverviewContent" class="overview-content">
+                        <div class="empty-state">Select a folder and upload a document to see the visual tree.</div>
+                    </div>
+                </div>
+
+                <!-- Q&A Chat Tab -->
+                <div id="tab-qa" class="tab-panel">
+                    <div class="chat-container">
+                        <div id="chatHistory" class="chat-history">
+                            <div class="message assistant-msg">
+                                Hello! Select a subject folder on the left and start asking questions!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-area">
+                        <input type="text" id="queryInput" placeholder="What would you like to know about this subject?">
+                        <button id="sendBtn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals or overlays -->
+    <div id="loadingOverlay" class="hidden">
+        <div class="spinner"></div>
+        <p>Synthesizing Knowledge...</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
